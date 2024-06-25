@@ -1,30 +1,32 @@
 class Solution {
-    public int[][] rotateMatrix(int k, int[][] mat) {
-        int n = mat.length;
-        int m = mat[0].length;
-        
-        // Reduce k to a value between 0 and 3, since rotating 4 times returns to original
-        k = k % 4;
-        
-        // Function to rotate the matrix 90 degrees clockwise
-        for (int i = 0; i < (3 * k) % 4; i++) {
-            mat = rotate90Clockwise(mat, n, m);
-            // Update dimensions after each rotation
-            int temp = n;
-            n = m;
-            m = temp;
+  public int[][] rotateMatrix(int k, int[][] mat) {
+    int m = mat.length; // number of rows in the matrix
+    int n = mat[0].length; // number of columns in the matrix
+
+    // Handle the case where k is greater than the number of elements in a row
+    k = k % n; 
+
+    // Create a new matrix to store the rotated elements
+    int[][] newMat = new int[m][n];
+
+    // Perform the rotation
+    for (int i = 0; i < m; i++) {
+      int temp[] = new int[n]; // Temporary array to store row elements
+      System.arraycopy(mat[i], 0, temp, 0, n); // Copy row to temporary array
+
+      // Perform k left rotations on the row elements
+      for (int j = 0; j < k; j++) {
+        int first = temp[0];
+        for (int l = 0; l < n - 1; l++) {
+          temp[l] = temp[l + 1];
         }
-        
-        return mat;
+        temp[n - 1] = first;
+      }
+
+      // Copy the rotated row to the new matrix
+      System.arraycopy(temp, 0, newMat[i], 0, n);
     }
-    
-    private int[][] rotate90Clockwise(int[][] mat, int n, int m) {
-        int[][] newMat = new int[m][n];
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                newMat[j][n - 1 - i] = mat[i][j];
-            }
-        }
-        return newMat;
-    }
+
+    return newMat;
+  }
 }
