@@ -1,32 +1,44 @@
 class Solution {
     public static ArrayList<Integer> subarraySum(int[] arr, int n, int s) {
-        ArrayList<Integer> result = new ArrayList<>();
+        // code here
+        ArrayList<Integer> list =  new ArrayList<>();
+        ArrayList<Integer> returnList =  new ArrayList<>();
         
-        // Initialize the starting and ending pointers of the window
-        int start = 0;
-        int currentSum = 0;
-        
-        // Traverse through the array
-        for (int end = 0; end < n; end++) {
-            // Add the current element to the current sum
-            currentSum += arr[end];
-            
-            // While the current sum is greater than the target sum, shrink the window from the start
-            while (currentSum > s && start <= end) {
-                currentSum -= arr[start];
+         int sum = 0;
+         int start = 0;
+     
+     if(s == 0 ){
+          for ( int i =0 ; i< n; i ++){
+            if(sum==arr[i] ){
+              list.add(i+1);
+              list.add(i+1);
+              break;
+            }
+              
+          }
+          
+          
+     }
+      else{
+          
+        for ( int i =0 ; i< n; i ++){
+            sum = sum+arr[i];
+            while (sum > s && start <=i ){
+                sum = sum - arr[start];
                 start++;
             }
-            
-            // If the current sum equals the target sum, return the 1-based indices
-            if (currentSum == s) {
-                result.add(start + 1);
-                result.add(end + 1);
-                return result;
+            if(sum==s  ){
+              list.add(start+1);
+              list.add(i+1);
+              break;
             }
         }
+      }
+        if(list.isEmpty()){
+           list.add(-1) ;
+        }
+        return list;
         
-        // If no subarray is found, return -1
-        result.add(-1);
-        return result;
     }
+    
 }
