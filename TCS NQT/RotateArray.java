@@ -10,9 +10,11 @@ class Solution{
   }
   
   static void rotateArray(int arr[], int d, int n){
+  
+    d = d % n;
+  
     if(d == 0)
         return;
-    d = d % n;
 
     reverse(arr, 0, d-1);
     reverse(arr, d, n-1);
