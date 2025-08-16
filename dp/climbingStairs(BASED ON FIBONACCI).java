@@ -1,17 +1,20 @@
-import java.util.*;
-class HelloWorld {
-    public static void main(String[] args) {
-        Scanner se = new Scanner(System.in);
-        int n = se.nextInt();
-        if(n <= 2)
-            System.out.println(n);
-        int first = 1, second = 2, last = 0;
-        for(int i=3; i<=n; i++)
-        {
-            last = first + second;
-            first = second;
-            second = last;
-        }
-        System.out.println("no of ways to climb stairs if user takes 1 or 2 steps to climb " + n + " stairs ; " + last);
-    }
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+	public static long countDistinctWayToClimbStair(int nStairs) {
+		// Write your code here.
+		int mod = 1000000007;
+		if(nStairs == 0 || nStairs == 1)
+			return 1;
+		
+		long[] dp = new long[nStairs + 1];
+		dp[0] = 1;
+		dp[1] = 1;
+
+		for(int i=2; i<=nStairs; i++){
+			dp[i] = (dp[i-1] + dp[i-2]) % mod;
+		}
+
+		return dp[nStairs];
+	}
 }
