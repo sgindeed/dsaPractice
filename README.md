@@ -52,6 +52,4 @@ The repository includes solutions that are manually added and updated. You can c
 ## License
 
 This project is not licensed.
-```
 
-This README provides a detailed overview and instructions for using and contributing to the repository, focusing on the solutions to SDE problems from GeeksforGeeks and LeetCode.
